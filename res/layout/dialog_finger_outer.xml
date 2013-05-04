@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/outerdialog"
+          android:layout_height="wrap_content" 
+		  android:layout_width="wrap_content"
+		  android:background="#ffffffff" 
+		  android:orientation="vertical">
+    <LinearLayout  
+          android:layout_height="wrap_content" 
+		  android:layout_width="wrap_content"
+		  android:background="#ffffffff" 
+		  android:orientation="horizontal">
+	  
+        <TextView
+          android:id="@+id/streettext"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:text="  Street:"
+	      android:minWidth="100dip"/>
+	    <EditText
+	      android:id="@+id/streetedit"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dp"
+          android:layout_marginRight="20dp"
+          android:ems="10" 
+	      android:minWidth="100dip"
+	      android:text="华山路"/>
+    </LinearLayout>
+    <LinearLayout
+          android:layout_height="wrap_content" 
+		  android:layout_width="wrap_content"
+		  android:background="#ffffffff" 
+		  android:orientation="horizontal">
+       <TextView
+           android:id="@+id/citytext"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:text="  City:"
+	      android:minWidth="100dip"/>
+	    <EditText
+	      android:id="@+id/cityedit"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dp"
+          android:layout_marginRight="20dp"  
+          android:ems="10" 
+	      android:minWidth="100dip"
+	      android:text="上海"/>
+    </LinearLayout>
+</LinearLayout>
