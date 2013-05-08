@@ -114,7 +114,7 @@ public class LocationService extends Activity {
         mapContr=new MyMapController(LocationService.this,mapview,zoom);
  	    mapview.ActivityCaller=ActivityCaller;  
  	    mapview.setBackgroundColor(color.background_light); 
- 	    mapContr.ChangeMap("5A_31.024284993533044_121.43261969089508_1.png");
+ 	   // mapContr.ChangeMap("NO5_A_1.png");
  	    if(GlobalData.indoorMapInfo.getMapAreaID()!=null){
  	    	mapContr.ChangeMap(GlobalData.indoorMapInfo.getMapAreaID()+".png");
  	    }
@@ -144,7 +144,7 @@ public class LocationService extends Activity {
     	map.putString("buildingID",currentMap.buildingID);
     	map.putString("floorID", currentMap.roomID);
     	intent.putExtra("MapID", map);
-    	bindService(intent,conn,Service.BIND_AUTO_CREATE);    
+    	getApplicationContext().bindService(intent,conn,Service.BIND_AUTO_CREATE);    
        //在新线程中调用Locating.Service,3s一次  	
     	if(LocatingTimer==null){
     		LocatingTimer=new Timer();
@@ -236,7 +236,7 @@ public class LocationService extends Activity {
     	}
      
     	if(isBund==true){
-    		unbindService(conn);
+    		getApplicationContext().unbindService(conn);
     		Log.i("LocationService","unbind locating.service");
     	}
     	isBund=false;

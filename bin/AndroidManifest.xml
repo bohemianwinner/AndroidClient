@@ -32,7 +32,7 @@
              android:name="com.androidclient.outerfingerprints.OuterFingerPrints"
              android:configChanges="keyboardHidden|orientation|screenSize" >    
          </activity>       
-         <activity 
+         <activity         
              android:name="com.androidclient.innerfingerprints.InnerFingerPrintsActivity"
              android:configChanges="keyboardHidden|orientation|screenSize" >
             </activity>

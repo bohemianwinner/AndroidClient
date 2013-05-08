@@ -98,9 +98,9 @@ public class OuterFingerPrints extends Activity {
     			break;
     		case GlobalData.MSG_WHAT_OUTER_BUILDING_CONFIRM_POSITIVE: 
     			//user confirm the map infomaton and then begin to download map;
-    			Log.i("OuterFingerPrints","Handler");
     			DownloadMap downmap=new DownloadMap(GlobalData.indoorMapInfo.getMapAreaID(), 
     					OuterFingerPrints.this, handler,GlobalData.MSG_WHAT_OUTER_MAP_DOWNLOAD_OK);
+    			Log.i("OuterFIngerPrints:Handler","After download map");
     			break;
     		case GlobalData.MSG_WHAT_OUTER_MAP_DOWNLOAD_OK:
     			OuterFingerPrints.this.finish();

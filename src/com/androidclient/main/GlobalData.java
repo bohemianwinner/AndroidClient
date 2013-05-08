@@ -42,11 +42,14 @@ public class GlobalData {
      static public IndoorMapInfo indoorMapInfo=new IndoorMapInfo();
      
      //URL
-     static public String host="http://locationservice.cf.sjtu.edu.cn";
+    // static public String host="http://locationservice.cf.sjtu.edu.cn";
+     static public String host="http://192.168.1.101:3000";
      static public String StartURL=host+"/start";
      static public String LocateURL=host+"/locate";
      static public String ReqMapURL=host+"/reqmap";
     
-     static public String MapURL="http://locationservice.cf.sjtu.edu.cn/indoorMaps";
+     //static public String MapURL="http://locationservice.cf.sjtu.edu.cn/indoorMaps";
+      static public String MapURL="http://192.168.1.101:3000/indoorMaps";
+     
      
 }

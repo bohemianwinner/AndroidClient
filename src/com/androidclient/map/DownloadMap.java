@@ -40,8 +40,10 @@ public class DownloadMap {
 	};
 
 	public DownloadMap(final String mapAreaId, final Context context1,final Handler handler,final int Action){
+		Log.i("DownLoad Map","begin to download");
 		context=context1;
 		final File  mapFile=new File(GlobalData.MapsDir+File.separator+mapAreaId+".png");
+		Log.i("DownLoad Map:file exist",String.valueOf(mapFile.exists()));
 		if(!mapFile.exists()){
 		    MapDownDialog=ProgressDialog.show(context, "Waiting..", "Downloading...");
 	        new Thread(){
@@ -56,11 +58,12 @@ public class DownloadMap {
 		     			   conn.setConnectTimeout(5 * 1000);  
 		     			   conn.setRequestMethod("GET");  
 		     		        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+		     		        	 Log.i("Download Map","HTTP_OK");
 		     		        	 InputStream inStream=conn.getInputStream();
 		     		        	 byte[] partImage=new byte[10240];
 		     		        	 int length;
 		     		        	 while((length=inStream.read(partImage))>0){
-						               outputStream.flush(); 
+						               //outputStream.flush(); 
 					        	       outputStream.write(partImage, 0, length);
 		     		        	 }
 		     		        	 inStream.close();
