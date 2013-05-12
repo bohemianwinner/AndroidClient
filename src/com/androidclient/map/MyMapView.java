@@ -80,17 +80,30 @@ public class MyMapView extends View implements OnGestureListener{
 		super.onDraw(canvas);
 		  ViewHeight=(int)(bitmap.getHeight()*scale_constant);
 		  ViewWidth=(int)(bitmap.getWidth()*scale_constant);
+		  if(ActivityCaller.equals(GlobalData.STARTACTIVITY_EXTRA_SOURCE_OUTERFINGERPRINTS_TO_LOCATIONSERVICE)){
+				Paint paint=new Paint();
+				paint.setStyle(Paint.Style.STROKE);
+				paint.setStrokeWidth(3);
+				paint.setColor(Color.RED);
+				paint.setAlpha(50);
+			    int I=(int)(ViewHeight/50);
+			    int J=(int)(ViewWidth/50);
+			    for(int i=1;i<=I;i++){
+		         canvas.drawLine(0, i*50, ViewWidth, i*50, paint);
+			    }
+			    for(int j=1;j<=J;j++){
+			    	canvas.drawLine(j*50, 0, j*50, ViewHeight, paint);
+			    }
+		  }
 		if(touchX>=0){
 		    Matrix matrix=new Matrix();
 		    matrix.setScale(scale_constant, scale_constant);
 		   // canvas.drawBitmap(bitmap, matrix, null);
 			touchX=((int)(touchX/50))*50;
 			touchY=((int)(touchY/50))*50;	
-			Paint paint=new Paint();
-			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeWidth(3);
-			paint.setColor(Color.RED);
-			canvas.drawRect(new Rect(touchX,touchY,touchX+50,touchY+50), paint);
+			Paint paint2=new Paint();
+			paint2.setColor(Color.LTGRAY);
+			canvas.drawCircle(touchX, touchY, 10, paint2);
 		}
 		else if(locationX>=0 &&locationY>=0) {
 			 Matrix matrix=new Matrix();
@@ -157,13 +170,15 @@ public class MyMapView extends View implements OnGestureListener{
 		return false;
 	}
 	@Override
-	public void onLongPress(MotionEvent arg0) {
+	public void onLongPress(MotionEvent event) {
 		// TODO Auto-generated method stub
     	//Dialog  
 		 if(ActivityCaller.equals(GlobalData.STARTACTIVITY_EXTRA_SOURCE_OUTERFINGERPRINTS_TO_LOCATIONSERVICE)){
 			 if(scale_constant>=4){
-				  InnerFingerDialog info=new InnerFingerDialog(context1,MyMapView.this);
-				  Log.i("onLongPress","Dialog");
+					touchX=(int)event.getX();
+			        touchY=(int)event.getY();
+			        invalidate(); 
+				    Log.i("onLongPress","Dialog");
 			 }
 		 }
 	}
@@ -174,15 +189,11 @@ public class MyMapView extends View implements OnGestureListener{
 		touchX=-1;
     	touchY=-1;
     	invalidate(); 
-
 		return false;
 	}
 	@Override
 	public void onShowPress(MotionEvent event) {
 		// TODO Auto-generated method stub
-		touchX=(int)event.getX();
-        touchY=(int)event.getY();
-        invalidate(); 
 	}
 	@Override
 	public boolean onSingleTapUp(MotionEvent arg0) {

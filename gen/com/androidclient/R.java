@@ -13,11 +13,12 @@ public final class R {
     public static final class drawable {
         public static final int backgroud_main=0x7f020000;
         public static final int building=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int pic3=0x7f020003;
-        public static final int pop2=0x7f020004;
-        public static final int pop3=0x7f020005;
-        public static final int street=0x7f020006;
+        public static final int finger=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int pic3=0x7f020004;
+        public static final int pop2=0x7f020005;
+        public static final int pop3=0x7f020006;
+        public static final int street=0x7f020007;
     }
     public static final class id {
         public static final int ScrollX=0x7f070003;
@@ -34,8 +35,9 @@ public final class R {
         public static final int layer=0x7f070013;
         public static final int locating=0x7f070000;
         public static final int map=0x7f070005;
+        public static final int menu_fingerprints_inner=0x7f070015;
         public static final int menu_settings=0x7f070014;
-        public static final int menu_streetname=0x7f070015;
+        public static final int menu_streetname=0x7f070016;
         public static final int outerdialog=0x7f07000e;
         public static final int outermap=0x7f070002;
         public static final int roomID=0x7f07000d;
@@ -54,7 +56,8 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_android_client=0x7f060000;
-        public static final int activity_fingerprints_outer=0x7f060001;
+        public static final int activity_fingerprints_inner=0x7f060001;
+        public static final int activity_fingerprints_outer=0x7f060002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

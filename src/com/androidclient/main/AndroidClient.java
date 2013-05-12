@@ -78,6 +78,7 @@ public class AndroidClient extends Activity {
 				// TODO Auto-generated method stub
 				if(isNetWorkOK){
 					Intent intent_fingerprints_outer=new Intent(AndroidClient.this,OuterFingerPrints.class);
+					intent_fingerprints_outer.putExtra("source", GlobalData.STARTACTIVITY_EXTRA_SOURCE_OUTERFINGERPRINTS_TO_LOCATIONSERVICE);
 					AndroidClient.this.startActivity(intent_fingerprints_outer);
 				}else{
 					Toast.makeText(AndroidClient.this, "NetWork isn't available", Toast.LENGTH_SHORT).show();

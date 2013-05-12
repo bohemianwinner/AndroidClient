@@ -10,6 +10,9 @@ import android.R.color;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 import android.widget.ZoomControls;
 
 public class InnerFingerPrintsActivity extends Activity {
@@ -33,4 +36,27 @@ public class InnerFingerPrintsActivity extends Activity {
     	mapview.setBackgroundColor(color.darker_gray);
     	mapContr.ChangeMap(GlobalData.indoorMapInfo.getMapAreaID()+".png");
 	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_fingerprints_inner, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.menu_fingerprints_inner:
+			if(mapview.touchX>0){
+				InnerFingerDialog info=new InnerFingerDialog(InnerFingerPrintsActivity.this,mapview); 
+			}else{
+				Toast.makeText(InnerFingerPrintsActivity.this,"Select a Point", Toast.LENGTH_SHORT).show();
+			}
+			     
+			break;
+		}
+    	
+    	return false;
+    }
 }
