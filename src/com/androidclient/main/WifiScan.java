@@ -23,11 +23,13 @@ public class WifiScan extends Service {
 ///////////to store  BSSID and RSSI in each measure
    private ArrayList<String> BSSID=new ArrayList<String>(); 
    private ArrayList<Integer> RSSI=new ArrayList<Integer>();
+   private ArrayList<Integer> Appear_Time=new ArrayList<Integer>();
    
    ///Wifi related
 	 private WifiManager mainWifi;
 	 private WifiReceiver receiver;
 	 private List<ScanResult> listWifi;
+	 private List<WifiConfiguration> configureInfo;
    //标识上一个Scan是否结束
 	 private boolean receiving;
    //标识工作任务已完成
@@ -38,12 +40,16 @@ public class WifiScan extends Service {
      @Override
 	 public void onCreate(){
        super.onCreate();
+       Log.i("wifiscan","oncreate");
 	   data_cnt=0;
 	   receiver=new WifiReceiver();
 	   data=new Bundle();
 	   mainWifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
 	   if(!mainWifi.isWifiEnabled())
 		   mainWifi.setWifiEnabled(true);
+	   
+	   configureInfo=mainWifi.getConfiguredNetworks();
+
    }
  	@Override
 	public IBinder onBind(Intent intent) {
@@ -57,6 +63,7 @@ public class WifiScan extends Service {
  		       data.clear();
  	    	   RSSI.clear();
  	    	   BSSID.clear();
+ 	    	   Appear_Time.clear();
 
  		}
  		Sample_CNT=intent.getIntExtra("Sample_CNT", -1);
@@ -64,9 +71,9 @@ public class WifiScan extends Service {
  			public void run(){
  				while(data_cnt<Sample_CNT){
  	 	    		data_cnt++;
+ 	 	    		Log.i("WifiScan",String.valueOf(data_cnt));
  	 				mainWifi.startScan(); 				
  	 				receiving=true;
- 	 				
  	 				while(receiving);
  	 	       }
  			}
@@ -111,12 +118,16 @@ public class WifiScan extends Service {
 	            	   int index=BSSID.indexOf(listWifi.get(i).BSSID);
 	            	   int tmp_level=RSSI.get(index).intValue();
 	            	   RSSI.set(index,tmp_level+listWifi.get(i).level);
+	            	   int tmp_time=Appear_Time.get(index).intValue();
+	            	   Appear_Time.set(index, tmp_time+1);
 	            	   detected[index]=true;
 	               }else{
 	            	   BSSID.add(listWifi.get(i).BSSID);
-	            	   RSSI.add((data_cnt-1)*(-120)+listWifi.get(i).level);
+	            	   RSSI.add(listWifi.get(i).level);
+	            	   Appear_Time.add(1);
 	               }
 				}
+				/*
 				// if the BSSID　that has been in the array but not found in the latest scan , add -120 to the RSSI
 				for(int i=0;i<detected.length;i++){
 					if(!detected[i]){
@@ -124,11 +135,11 @@ public class WifiScan extends Service {
 						RSSI.set(i,tmp_level-120);
 					}
 				}
-		
+		      */
 				if(data_cnt==Sample_CNT){
 				    String[] RSSI_A=new String[RSSI.size()];
 				     for(int i=0;i<RSSI.size();i++){
-				    	 RSSI_A[i]=String.valueOf(RSSI.get(i)/Sample_CNT);
+				    	 RSSI_A[i]=String.valueOf(RSSI.get(i)/Appear_Time.get(i));
 				     }   
 				    
 				     String[] BSSID_A=new String[BSSID.size()];
